@@ -1,0 +1,31 @@
+/*main css*/
+/*<link href="//netdna.bootstrapcdn.com/font-awesome/latest/css/font-awesome.css" rel="stylesheet">;
+*/
+body {
+	/*background-image: url("../img/teslabackground0.jpg");*/
+	background-size: cover;
+}
+#header h1 {
+	text-align: center;
+	text-decoration: underline;	
+}
+#review h2 {
+	text-decoration: underline;	
+}
+#customerReviews h2 {
+	text-align: center;
+	text-decoration: underline;	
+}
+
+#review h2 {
+	text-align: center;
+}
+
+#review .form-group {
+	margin-bottom: 0px;
+}
+#reviewForm {
+	background-color: #b0c4de;
+	padding-left: 50px;
+	margin-bottom: 15px;
+}
