@@ -15,4 +15,4 @@ Build a CRUD web application
 	I spent too much time searching in google.. but I am not sure if there is a better way though. 
 
 
-	See my work: https://github.com/slopsang/crud-application.git
+	See my work: http://students.washington.edu/sangkim1/info343/crud-application/
