@@ -3,7 +3,7 @@ Build a CRUD web application
 
 1. Did you receive help from any other sources (classmates, etc.)? If so, please list who.
 	
-	We spent some time together during office hours (Julian, Susan, James)
+	We spent some time together during office hours and shared some ideas (Julian, Susan, James...)
 2. Did you complete any advanced extensions to this challenge? If so, what?
 	
 	no.
