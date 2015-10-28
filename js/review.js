@@ -1,114 +1,129 @@
-// javascript
 $(document).ready(function() {
 	Parse.initialize('jDhZ3P0KD6yXunZ1jnkMpt4854q8qXjR7RbgDSXe', 'GZpWOiz2sD1jEEwVbJqUf5i30GxTB6T4YWu5vzTe');
+	
 	var Review = Parse.Object.extend('Review');
-	var totalRating = 0;
-	var totalReview = 0;
-	var averageStar = 0;
-
-	$('#avgStar').raty();
+	var query;
+	var review;
 
 	$('#reviewStar').raty({
 		score: 0
 	});
 
-	//$('#customStar').raty();
-
 	$('form').submit(function() {
-		var review = new Review();
+		review = new Review();
 
-		var reviewStar = $('#reviewStar').raty('score');
+		var userInputTitle = $('#reviewTitle');
+		review.set("userTitle", userInputTitle.val());
+		var userInputContent = $('#reviewContent');
+		review.set("userContent", userInputContent.val());
 
-		reviewStar = Number(reviewStar);
-		review.set('reviewStar', reviewStar);
-
-		totalRating += reviewStar;
-		totalReview ++;
-		averageStar = parseInt(totalRating/totalReview);
-		$('#avgStar').raty({
-			score: averageStar
-		});
-
-		console.log('total rating: ' + totalRating);
-		console.log('total review: ' + totalReview);
-		console.log('average star: ' + averageStar);
-		console.log('review star: ' + reviewStar);
-
-		$('#reviewStar').raty('set', {
-			option: 0
-		});
-
-		$(this).find('input, textarea').each(function() {
-			review.set($(this).attr('id'), $(this).val());
-			$(this).val('');
-		});
+		review.set("userRating", parseInt($("#reviewStar").raty("score")));
+		review.set("likes", 0);
+		review.set("dislikes", 0);
 
 		review.save(null, {
-			success:getData
+			success: function() {
+				userInputTitle.val(''); // reset input values
+				userInputContent.val('');
+				$('#reviewStar').raty({
+					score: 0
+				});
+				getData();
+			}
 		});
 		return false;
 	});
 
 	var getData = function() {
-		var query = new Parse.Query(Review);
+		query = new Parse.Query(Review);
 		query.notEqualTo('reviewTitle', '');
+		query.descending('createdAt');
 		query.find({
 			success:function(results) {
-				buildList(results)
+				buildList(results);
 			}
 		});
-	};
+	}
 
 	var buildList = function(data) {
 		$('section').empty();
+		var totalStar = 0;
 		data.forEach(function(d) {
+			totalStar += d.get('userRating');
 			addItem(d);
-		})
+		});
+		$('#avgStar').raty({
+			readOnly: true,
+			score: totalStar/(data.length)
+		});
 	}
 
 	var addItem = function(item) {
-		var reviewStar = item.get('reviewStar');
-		var reviewTitle = item.get('reviewTitle');
-		var reviewIdea = item.get('reviewIdea');
-
-		var form = $('<form id="reviewForm"></form>');
-		var row = $('<div id="bReview" class="row"></div>');
-		var col = $('<div id="aReview" class="col-md-12"></div>');
-
-		//form = $('<form id="reviewForm"></form>');
-		$('#customReview').append(form);
-
-		//$('#reviewForm').append(row);
-		$('form').append(row);
-		$('div:last').raty({
-			score: reviewStar
+		// set values
+		var userTitle = item.get('userTitle');
+		var userContent = item.get('userContent');
+		var userRating = item.get('userRating');
+		var likes = item.get('likes');
+		var dislikes = item.get('dislikes');
+		// set elements
+		var div = $('<div id="eachReview"></div>');
+		var button = $('<button class="btn-default btn-xs voting"><span class="glyphicon glyphicon-remove"></span></button>');
+		var dislike = $("<button class='btn-default btn-xs voting'><span class='fa fa-arrow-circle-down'></span></button>");
+		var like = $("<button class='btn-default btn-xs voting'><span class='fa fa-arrow-circle-up'></span></button>");
+		var stars = $("<h4>Rating: <span id='customRating'class='raty'></span></h4>");
+		var title = $('<h2 id="customTitle"></h2>');
+		var content = $('<h3></h3>');
+		var loveOrhate = $('<p id="customVote"><b></b></p>');
+  		button.click(function() {
+		 	item.destroy({
+		 		success: function() {
+		 			getData();
+		 		}
+		 	});
+	 	});
+  		like.click(function() {
+			query.get(item.id, {
+				success: function(review) {
+					review.increment('likes')
+					review.save(null, {
+						success: getData
+					});
+				}
+			})
 		});
+		dislike.click(function() {
+			query.get(item.id, {
+				success: function(review) {
+					review.increment('dislikes')
+					review.save(null, {
+						success: getData
+					})
+				}
+			})
+		})
+		title.text(userTitle);
+		content.text(userContent);
 
-		row = $('<div id="bReview" class="row"></div>');
-		//$('#reviewForm').append(row);
-		$('form').append(row);
-		$('div:last').text(reviewTitle);
+		title.append(button);
+		title.append(dislike);
+		title.append(like);
+		div.append(title);
+		div.append(stars);
+		div.append(content);
+		// make able to users to indicate whether a particular review was helpful or unhelpful
+		if (likes == 0 && dislikes == 0) {
+			loveOrhate.text("This review has not been voted. Was this helpful?");
+		} else {
+			loveOrhate.text(likes + " out of " + (likes + dislikes) + " people found this review helpful.");
+		}
 
-		row = $('<div id="bReview" class="row"></div>');
-		//$('#reviewForm').append(row);
-		$('form').append(row);
-		$('div:last').text(reviewIdea);
+		div.append(loveOrhate);
+		$('section').append(div);
 
-		//var li = $('<li>rating: '+ reviewStar +'<br>review title: ' + reviewTitle + '<br>review: ' + reviewIdea + '</li>');
-		//var li = $(customStar + reviewTitle + reviewIdea);
-
-		// var button = $('<button class="btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>')
-		// button.click(function() {
-		// 	item.destroy({
-		// 		success:getData
-		// 	});
-		// });
-
-		//li.append(button);
-		//$('ol').append(li);
-
+		stars.raty({
+			score: userRating, 
+			readOnly: true
+		});
 	}
-	getData()
+	getData();
 });
-
-

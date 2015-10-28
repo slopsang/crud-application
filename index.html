@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<title>The Review:Tesla Model S</title>
+		<link rel="shortcut icon" type="image/jpg" href="img/Tesla.jpg"/>
 		<link type="text/css" rel="stylesheet" href="css/main.css">
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
@@ -17,12 +18,12 @@
 	<body>
 		<div id="header" class="container">
 			<h1>The Review: 2015 Tesla Model S</h1>
-			<div class="row">
+			<div class="row">	
 				<div class="col-md-7">
-					<img id='product' class='displayed' src='img/tesla0.jpg' width='100%'>
+					<img id='product' class='displayed' src='img/Tesla.jpg' width='100%'>
 				</div>
-				<div class="col-md-5">
-					<p><b>Average Rating </b><div id="avgStar"></div></p>
+				<div class="col-md-5" id="description">
+					<h3>Average Rating: <span id="avgStar"></span></h3>
 					<h3>Zero Emissions. Zero Compromises.</h3>
 					<p>
 						Tesla's advanced electric powertrain delivers exhilarating performance. Unlike a gasoline internal combustion engine with hundreds of moving parts, Tesla electric motors have only one moving piece: the rotor. As a result, Model S acceleration is instantaneous, silent and smooth. Step on the accelerator and in as little as 2.8 seconds Model S is travelling 60 miles per hour, without hesitation, and without a drop of gasoline. Model S is an evolution in automobile engineering.
@@ -33,34 +34,28 @@
 
 		<div id="review" class="container">
 			<h2>Let us hear your thoughts!</h2>
-
 			<form>
 				<div class="form-group">
-					<div id="reviewStar"></div>
+					<h4>Rating: <span id="reviewStar"></span></h4>
 				</div>
 				<div class="form-group">
 					<label for="reviewTitle"><b>Title of your review</b></label>
 					<input type="text" id="reviewTitle" placeholder="Title" class="form-control"><br>
 				</div>
 				<div class="form-group">
-					<label for="reviewIdea"><b>What did you think about 2015 Tesla Model S?</b></label>
-					<textarea rows="4" cols="100" id="reviewIdea" placeholder="Your review" class="form-control"></textarea>
+					<label for="reviewContent"><b>What did you think about 2015 Tesla Model S?</b></label>
+					<textarea rows="4" cols="100" id="reviewContent" placeholder="Your review" class="form-control"></textarea>
 				</div>
-				<button type="submit" class="btn btn-primary">Add your review</button>
+				<button id="submitButton" type="submit" class="btn btn-primary">Add your review</button>
 			</form>
 		</div>
 		<div id="customerReviews" class="container">
-			<h2>Customer Reviews</h2>
-
-			<div id="customStar"></div>
-
-<!-- 			<ol id="list">
-			</ol> -->
-		
-		<section id="customReview"></section>
-
+			<h2>Customer Reviews</h2> 
+			<section id="customReview">
+				<ol>
+				</ol>
+			</section>
 		</div>
 	</body>
-
 	
 </html>

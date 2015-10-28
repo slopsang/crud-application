@@ -2,30 +2,66 @@
 /*<link href="//netdna.bootstrapcdn.com/font-awesome/latest/css/font-awesome.css" rel="stylesheet">;
 */
 body {
-	/*background-image: url("../img/teslabackground0.jpg");*/
+	background-image: url("../img/teslabackground6.jpg");
 	background-size: cover;
+	background-color:#E9EAEE;
 }
 #header h1 {
 	text-align: center;
 	text-decoration: underline;	
+	color: #2E002E;
 }
 #review h2 {
 	text-decoration: underline;	
+	color: #2E002E;
 }
 #customerReviews h2 {
 	text-align: center;
 	text-decoration: underline;	
+	color: #2E002E;
 }
-
+#customReview h2 {
+	text-align: center;
+	color: black;
+	text-decoration: none;
+}
+#customTitle {
+	padding-top: 10px;
+}
+#customVote {
+	text-align: center;
+}
 #review h2 {
 	text-align: center;
 }
-
+#submitButton {
+	margin-top: 5px;
+}
 #review .form-group {
 	margin-bottom: 0px;
 }
-#reviewForm {
-	background-color: #b0c4de;
-	padding-left: 50px;
+#eachReview {
+	background-color: #E2E2EB;
+	padding-left: 30px;
 	margin-bottom: 15px;
+}
+#eachTitle {
+	margin-top: 0px;
+}
+#eachIdea {
+	padding-bottom: 10px;
+}
+#customReview h3 {
+	margin-top: 10;
+}
+#description {
+	color: #2E002E;
+}
+.voting {
+	float: right;
+	border: none;
+	background-color: #E9EAEE;
+}
+.voting:hover {
+	color: #888888;
 }
