@@ -2,13 +2,12 @@
 /*<link href="//netdna.bootstrapcdn.com/font-awesome/latest/css/font-awesome.css" rel="stylesheet">;
 */
 body {
-	background-image: url("../img/teslabackground6.jpg");
 	background-size: cover;
-	background-color:#E9EAEE;
 }
 #header h1 {
 	text-align: center;
 	text-decoration: underline;	
+	margin-bottom: 3%;
 	color: #2E002E;
 }
 #review h2 {
