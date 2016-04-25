@@ -1,3 +1,3 @@
-# crud-application
+# Basic User-Review System using Parse,the Cloud-based database
 
-See my work: http://students.washington.edu/sangkim1/info343/crud-application/
+See live site: http://students.washington.edu/sangkim1/info343/crud-application/
